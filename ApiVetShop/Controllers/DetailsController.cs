@@ -1,6 +1,7 @@
 ﻿using APICurso.BLL;
 using APICurso.IBLL;
 using APICurso.Models;
+using ApiVetShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -19,7 +20,7 @@ namespace ApiVetShop.Controllers
 
         [HttpGet]
         [Route("Listar")]
-        public async Task<ActionResult<ResponseListaClientes>> ObtenerDetails()
+        public async Task<ActionResult<ResponseDetails>> ObtainDetails()
         {
             try
             {
@@ -29,12 +30,12 @@ namespace ApiVetShop.Controllers
             catch (Exception)
             {
 
-                ResponseListaClientes responseDetails = new ResponseListaClientes();
+                var responseDetails = await new ResponseListDetails();
 
                 ResponseModel responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al obtener la lista de Detalles";
-                responseDetails.errores = responseModel;
+                responseDetails.Errors = responseModel;
                 return responseDetails;
 
 

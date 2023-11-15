@@ -20,7 +20,7 @@ namespace ApiVetShop.Controllers
 
         [HttpGet]
         [Route("Seleccionar")]
-        public async Task<ActionResult<ResponseUsers>> ObtenerUsers(int id)
+        public async Task<ActionResult<ResponseUsers>> ObtainUsers(int id)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace ApiVetShop.Controllers
 
         [HttpGet]
         [Route("Verify")]
-        public async Task<ActionResult<ResponseUsers>> ObtenerUsers(string email, string password)
+        public async Task<ActionResult<ResponseUsers>> ObtainUsers(string email, string password)
         {
             try
             {
