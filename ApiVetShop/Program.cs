@@ -1,9 +1,10 @@
-using APICurso.BLL;
+
 using APICurso.Dapper;
-using APICurso.IBLL;
 using APICurso.IDapper;
-using APICurso.IRepository;
+using APICurso.BLL;
+using APICurso.IBLL;
 using APICurso.Repository;
+using APICurso.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
