@@ -2,7 +2,7 @@
 {
     public class ResponseListaClientes
     {
-        public  List<Cliente> clientes { get; set; } = new List<Cliente>();
+        public  List<Client> clientes { get; set; } = new List<Client>();
         public ResponseModel errores { get; set; } = new ResponseModel();
 
     }
