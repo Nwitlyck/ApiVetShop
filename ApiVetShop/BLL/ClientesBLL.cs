@@ -14,7 +14,7 @@ namespace APICurso.BLL
             _clientesRepository = clientesRepository;
         }
 
-        public async Task<ResponseCliente> Crear(Client cliente)
+        public async Task<ResponseCliente> Crear(Cliente cliente)
         {
             try
             {

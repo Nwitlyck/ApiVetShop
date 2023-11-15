@@ -64,7 +64,7 @@ namespace APICurso.Controllers
 
         [HttpPost]
         [Route("Crear")]
-        public async Task<ActionResult<ResponseCliente>> Crear(Client cliente)
+        public async Task<ActionResult<ResponseCliente>> Crear(Cliente cliente)
         {
             try
             {
