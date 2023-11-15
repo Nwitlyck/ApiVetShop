@@ -17,7 +17,7 @@ namespace APICurso.Repository
         {
             _context = context;
         }
-        public async Task<int> Crear(Cliente cliente)
+        public async Task<int> Crear(Client cliente)
         {
             try
             {
@@ -39,13 +39,13 @@ namespace APICurso.Repository
             }
         }
 
-        public async Task<IEnumerable<Cliente>> ListaClientes()
+        public async Task<IEnumerable<Client>> ListaClientes()
         {
             try
             {
                 using(var conn = _context.CrearConexion())
                 {
-                    return await conn.QueryAsync<Cliente>("lista_clientes"); 
+                    return await conn.QueryAsync<Client>("lista_clientes"); 
                 }
             }
             catch (Exception)
@@ -55,7 +55,7 @@ namespace APICurso.Repository
             }
         }
 
-        public async Task<Cliente> ObtenerCliente(int id)
+        public async Task<Client> ObtenerCliente(int id)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace APICurso.Repository
                 param.Add("@id", id, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    return await conn.QuerySingleOrDefaultAsync<Cliente>("obtener_cliente", param, commandType: CommandType.StoredProcedure);                
+                    return await conn.QuerySingleOrDefaultAsync<Client>("obtener_cliente", param, commandType: CommandType.StoredProcedure);                
                 }
             }
             catch (Exception)

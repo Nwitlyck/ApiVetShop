@@ -1,6 +1,6 @@
 ﻿namespace APICurso.Models
 {
-    public class Cliente
+    public class Client
     {
         public int Id { get; set; }
         public string? Nombre { get; set; }

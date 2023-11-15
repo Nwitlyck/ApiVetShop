@@ -2,7 +2,7 @@
 {
     public class ResponseCliente
     {
-        public Cliente cliente { get; set; } = new Cliente();
+        public Client cliente { get; set; } = new Client();
         public ResponseModel errores { get; set; } = new ResponseModel();  
     }
 }
