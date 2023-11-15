@@ -1,6 +1,6 @@
-﻿using APICurso.Models;
+﻿using ApiVetShop.Models;
 
-namespace APICurso.IBLL
+namespace ApiVetShop.IBLL
 {
     public interface IClientesBLL
     {

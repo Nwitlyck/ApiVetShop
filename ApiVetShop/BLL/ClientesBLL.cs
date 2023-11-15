@@ -1,9 +1,9 @@
-﻿using APICurso.IBLL;
-using APICurso.IRepository;
-using APICurso.Models;
+﻿using ApiVetShop.IBLL;
+using ApiVetShop.IRepository;
+using ApiVetShop.Models;
 using System.Diagnostics;
 
-namespace APICurso.BLL
+namespace ApiVetShop.BLL
 {
     public class ClientesBLL : IClientesBLL
     {

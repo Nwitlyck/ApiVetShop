@@ -1,6 +1,6 @@
-﻿using APICurso.BLL;
-using APICurso.IBLL;
-using APICurso.Models;
+﻿using ApiVetShop.BLL;
+using ApiVetShop.IBLL;
+using ApiVetShop.Models;
 using ApiVetShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;

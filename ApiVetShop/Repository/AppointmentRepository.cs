@@ -1,4 +1,4 @@
-﻿using APICurso.IDapper;
+﻿using ApiVetShop.IDapper;
 using ApiVetShop.IRepository;
 using ApiVetShop.Models;
 using Dapper;
@@ -13,13 +13,15 @@ namespace ApiVetShop.Repository
         {
             _context = context;
         }
-        public Task<IEnumerable<Appoiments>> ListAppointmets()
+        public Task<IEnumerable<Appoiments>> ListAppointmets(int userId)
         {
             try
             {
+                var param = new DynamicParameters();
+                param.Add("@vIdUser", userId, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    return await conn.QueryAsync<Appoiments>("list_appointments");
+                    return conn.QueryAsync<Appoiments>("list_appointments", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -32,22 +34,13 @@ namespace ApiVetShop.Repository
         {
             try
             {
-                DynamicParameters param = new DynamicParameters();
-                param.Add("@id", appoiment.Id, DbType.Int64, ParameterDirection.Input);
-                param.Add("@user_name", appoiment.UserName, DbType.String, ParameterDirection.Input);
-                param.Add("@customer_name", appoiment.CustomerName, DbType.String, ParameterDirection.Input);
-                param.Add("@unit_name", appoiment.UnitName, DbType.String, ParameterDirection.Input);
-                param.Add("@site_name", appoiment.SiteName, DbType.String, ParameterDirection.Input);
-                param.Add("@asistant_name", appoiment.AsistantName, DbType.String, ParameterDirection.Input);
-                param.Add("@date_time", appoiment.DateTime, DbType.DateTime, ParameterDirection.Input);
-                param.Add("@adress", appoiment.Adress, DbType.String, ParameterDirection.Input);
-                param.Add("@canton", appoiment.Canton, DbType.String, ParameterDirection.Input);
-                param.Add("@province", appoiment.Province, DbType.String, ParameterDirection.Input);
-                param.Add("@description", appoiment.Description, DbType.String, ParameterDirection.Input);
-                param.Add("@state", appoiment.State, DbType.String, ParameterDirection.Input);
+                var param = new DynamicParameters();
+                param.Add("@vId", appoiment.Id, DbType.Int64, ParameterDirection.Input);
+                param.Add("@vDescription", appoiment.Description, DbType.String, ParameterDirection.Input);
+                param.Add("@vState", appoiment.State, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    return await conn.QuerySingleOrDefaultAsync<Appoiments>("update_appointment", param, commandType: CommandType.StoredProcedure);
+                    return conn.QuerySingleOrDefaultAsync<int>("update_appointment", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
