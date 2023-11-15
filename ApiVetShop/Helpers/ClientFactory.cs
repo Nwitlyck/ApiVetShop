@@ -2,7 +2,7 @@
 using System.Net;
 
 
-namespace APICurso.Helpers
+namespace ApiVetShop.Helpers
 {
     public  static class ClientFactory
     {           

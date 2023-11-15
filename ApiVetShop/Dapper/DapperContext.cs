@@ -1,8 +1,8 @@
-﻿using APICurso.IDapper;
+﻿using ApiVetShop.IDapper;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace APICurso.Dapper
+namespace ApiVetShop.Dapper
 {
     public class DapperContext : IDapperContext
     {
@@ -12,7 +12,7 @@ namespace APICurso.Dapper
         public DapperContext(IConfiguration iConfiguration)
         {
             _iConfiguration = iConfiguration;
-            _cadenaconexion = _iConfiguration.GetConnectionString("API");           
+            _cadenaconexion = _iConfiguration.GetConnectionString("VetShop");           
         }
         public IDbConnection CrearConexion()
         {

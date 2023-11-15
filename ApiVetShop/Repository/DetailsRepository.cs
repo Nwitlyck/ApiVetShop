@@ -1,7 +1,8 @@
-﻿using APICurso.IDapper;
+﻿using ApiVetShop.IDapper;
 using ApiVetShop.IRepository;
 using ApiVetShop.Models;
 using Dapper;
+using System.Data;
 
 namespace ApiVetShop.Repository
 {
@@ -18,7 +19,7 @@ namespace ApiVetShop.Repository
             {
                 using (var conn = _context.CrearConexion())
                 {
-                    return await conn.QueryAsync<Cliente>("list_details");
+                    return conn.QueryAsync<Details>("list_details", null, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
