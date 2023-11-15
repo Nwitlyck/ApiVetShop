@@ -50,7 +50,6 @@ namespace APICurso.Repository
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -69,7 +68,6 @@ namespace APICurso.Repository
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
