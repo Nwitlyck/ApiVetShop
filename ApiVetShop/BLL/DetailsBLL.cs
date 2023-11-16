@@ -17,7 +17,6 @@ namespace ApiVetShop.BLL
             try
             {
                 var listDetails = await _detailsRepository.ListDetails();
-
                 var responseListDetails = new ResponseListDetails();
                 responseListDetails.Details = listDetails.ToList();
 
@@ -30,7 +29,7 @@ namespace ApiVetShop.BLL
                 return responseListDetails;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
