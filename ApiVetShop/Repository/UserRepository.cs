@@ -13,7 +13,7 @@ namespace ApiVetShop.Repository
         {
             _context = context;
         }
-        public Task<Users> SelectUser(int id)
+        public async Task<Users> SelectUser(int id)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace ApiVetShop.Repository
 
                 param.Add("@vId", id, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion()){
-                    return conn.QuerySingleOrDefaultAsync<Users>("select_user", param, commandType: CommandType.StoredProcedure);
+                    return await conn.QuerySingleOrDefaultAsync<Users>("[vetShop].[dbo].[select_user]", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -30,7 +30,7 @@ namespace ApiVetShop.Repository
             }
         }
 
-        public Task<bool> VerifyUser(string email, string password)
+        public async Task<bool> VerifyUser(string email, string password)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace ApiVetShop.Repository
                 param.Add("@vPassworld", password, DbType.String, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    return conn.QuerySingleOrDefaultAsync<Boolean>("verify_user", param, commandType: CommandType.StoredProcedure);
+                    return await conn.QuerySingleOrDefaultAsync<Boolean>("[vetShop].[dbo].[verify_user]", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

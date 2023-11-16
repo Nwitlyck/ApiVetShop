@@ -13,7 +13,7 @@ namespace ApiVetShop.Repository
         {
             _context = context;
         }
-        public Task<IEnumerable<Appoiments>> ListAppointmets(int userId)
+        public async Task<IEnumerable<Appoiments>> ListAppointmets(int userId)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace ApiVetShop.Repository
                 param.Add("@vIdUser", userId, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    return conn.QueryAsync<Appoiments>("list_appointments", param, commandType: CommandType.StoredProcedure);
+                    return await conn.QueryAsync<Appoiments>("[vetShop].[dbo].[list_appointments]", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -30,7 +30,7 @@ namespace ApiVetShop.Repository
             }
         }
 
-        public Task<int> UpdateAppointment(Appoiments appoiment)
+        public async Task<int> UpdateAppointment(Appoiments appoiment)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace ApiVetShop.Repository
                 param.Add("@vState", appoiment.State, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    return conn.QuerySingleOrDefaultAsync<int>("update_appointment", param, commandType: CommandType.StoredProcedure);
+                    return await conn.QuerySingleOrDefaultAsync<int>("[vetShop].[dbo].[update_appointment]", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

@@ -13,13 +13,13 @@ namespace ApiVetShop.Repository
         {
             _context = context;
         }
-        public Task<IEnumerable<Details>> ListDetails()
+        public async Task<IEnumerable<Details>> ListDetails()
         {
             try
             {
                 using (var conn = _context.CrearConexion())
                 {
-                    return conn.QueryAsync<Details>("list_details", null, commandType: CommandType.StoredProcedure);
+                    return await conn.QueryAsync<Details>("[vetShop].[dbo].[list_details]", null, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
