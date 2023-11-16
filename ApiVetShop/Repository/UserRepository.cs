@@ -1,4 +1,4 @@
-﻿using APICurso.IDapper;
+﻿using ApiVetShop.IDapper;
 using ApiVetShop.IRepository;
 using ApiVetShop.Models;
 using Dapper;
@@ -13,16 +13,15 @@ namespace ApiVetShop.Repository
         {
             _context = context;
         }
-        public Task<Details> SelectUser(int id)
+        public async Task<Users> SelectUser(int id)
         {
             try
             {
-                DynamicParameters param = new DynamicParameters();
+                var param = new DynamicParameters();
 
-                param.Add("@id", id, DbType.Int64, ParameterDirection.Input);
-                using (var conn = _context.CrearConexion())
-                {
-                    return await conn.QuerySingleOrDefaultAsync<Users>("select_user", param, commandType: CommandType.StoredProcedure);
+                param.Add("@vId", id, DbType.Int64, ParameterDirection.Input);
+                using (var conn = _context.CrearConexion()){
+                    return await conn.QuerySingleOrDefaultAsync<Users>("[vetShop].[dbo].[select_user]", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -31,17 +30,17 @@ namespace ApiVetShop.Repository
             }
         }
 
-        public Task<bool> VerifyUser(string email, string password)
+        public async Task<bool> VerifyUser(string email, string password)
         {
             try
             {
-                DynamicParameters param = new DynamicParameters();
+                var param = new DynamicParameters();
 
-                param.Add("@id", email, DbType.String, ParameterDirection.Input);
-                param.Add("@id", password, DbType.String, ParameterDirection.Input);
+                param.Add("@vEmail", email, DbType.String, ParameterDirection.Input);
+                param.Add("@vPassworld", password, DbType.String, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
-                    return await conn.QuerySingleOrDefaultAsync<Cliente>("verify_user", param, commandType: CommandType.StoredProcedure);
+                    return await conn.QuerySingleOrDefaultAsync<Boolean>("[vetShop].[dbo].[verify_user]", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

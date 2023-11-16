@@ -1,8 +1,8 @@
 ﻿namespace ApiVetShop.Models
 {
-    public class ResponseDetails
+    public class ResponseVerify
     {
-        public Details Detail { get; set; } = new Details();
+        public Boolean Flag { get; set; } = new Boolean();
         public ResponseModel Errors { get; set; } = new ResponseModel();
     }
 }

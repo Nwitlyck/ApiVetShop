@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace APICurso.IDapper
+namespace ApiVetShop.IDapper
 {
     public interface IDapperContext
     {

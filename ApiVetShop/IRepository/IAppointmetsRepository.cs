@@ -5,7 +5,7 @@ namespace ApiVetShop.IRepository
 {
     public interface IAppointmetsRepository
     {
-        public Task<IEnumerable<Appoiments>> ListAppointmets();
+        public Task<IEnumerable<Appoiments>> ListAppointmets(int userId);
         public Task<int> UpdateAppointment(Appoiments appoiment);
     }
 }
