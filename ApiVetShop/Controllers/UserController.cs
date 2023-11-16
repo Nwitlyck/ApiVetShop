@@ -10,20 +10,20 @@ namespace ApiVetShop.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserBLL _userBLL;
+        private readonly IUsersBLL _userBLL;
 
-        public UserController(IUserBLL userBLL)
+        public UserController(IUsersBLL userBLL)
         {
             _userBLL = userBLL;
         }
 
         [HttpGet]
-        [Route("Seleccionar")]
+        [Route("Select")]
         public async Task<ActionResult<ResponseUsers>> ObtainUsers(int id)
         {
             try
             {
-                return await _userBLL.ObtenerUsers(id);
+                return await _userBLL.SelectUser(id);
 
             }
             catch (Exception)
@@ -41,23 +41,23 @@ namespace ApiVetShop.Controllers
 
         [HttpGet]
         [Route("Verify")]
-        public async Task<ActionResult<ResponseUsers>> ObtainUsers(string email, string password)
+        public async Task<ActionResult<ResponseVerify>> ObtainUsers(string email, string password)
         {
             try
             {
-                return await _userBLL.ObtenerUsers(email, password);
+                return await _userBLL.VerifyUser(email, password);
 
             }
             catch (Exception)
             {
 
-                ResponseUsers responseUsers = new ResponseUsers();
+                var responseVerify = new ResponseVerify();
 
-                ResponseModel responseModel = new ResponseModel();
+                var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al buscar el Usuario";
-                responseUsers.Errors = responseModel;
-                return new JsonResult(responseUsers);
+                responseVerify.Errors = responseModel;
+                return new JsonResult(responseVerify);
             }
         }
 

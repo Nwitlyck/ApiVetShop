@@ -1,4 +1,6 @@
-﻿namespace ApiVetShop.Models
+﻿using ApiVetShop.Models;
+
+namespace ApiVetShop.Models
 {
     public class ResponseAppointments
     {
