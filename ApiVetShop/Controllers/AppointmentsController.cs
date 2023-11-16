@@ -10,19 +10,19 @@ namespace ApiVetShop.Controllers
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
-        private readonly IAppointmentsBLL _citasBLL;
-        public AppointmentsController(IAppointmentsBLL citasBLL)
+        private readonly IAppoinmentsBLL _appoinmentBLL;
+        public AppointmentsController(IAppoinmentsBLL citasBLL)
         {
-            _citasBLL = citasBLL;
+            _appoinmentBLL = citasBLL;
         }
 
         [HttpGet]
-        [Route("Listar")]
-        public async Task<ActionResult<ResponseListAppointments>> ObtainAppointments()
+        [Route("List")]
+        public async Task<ActionResult<ResponseListAppointments>> ObtainAppointmentsList(int userId)
         {
             try
             {
-                var resultado = await _appointmentsBLL.ListAppointments();
+                var resultado = await _appoinmentBLL.ListAppointments(userId);
                 return resultado;
             }
 
@@ -30,9 +30,9 @@ namespace ApiVetShop.Controllers
 
             {
 
-                ResponseListAppointments responseAppointments = new ResponseListAppointments();
+                var responseAppointments = new ResponseListAppointments();
 
-                ResponseModel responseModel = new ResponseModel();
+                var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al obtener la lista de citas";
                 responseAppointments.Errors = responseModel;
@@ -44,19 +44,19 @@ namespace ApiVetShop.Controllers
         }   
 
         [HttpPost]
-        [Route("Crear")]
-        public async Task<ActionResult<ResponseAppointments>> Crear(Appointments appointment)
+        [Route("Update")]
+        public async Task<ActionResult<ResponseAppointments>> Update(Appoiments appointment)
         {
             try
             {
-                var response = await _appointmentsBLL.Crear(appointment);
+                var response = await _appoinmentBLL.UpdateAppointment(appointment);
                 return new JsonResult(response);
             }
             catch (Exception)
             {
                 var responseCitas = new ResponseAppointments();
 
-                ResponseModel responseModel = new ResponseModel();
+                var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al insertar las citas";
                 responseCitas.Errors = responseModel;

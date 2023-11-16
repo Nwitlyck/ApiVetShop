@@ -20,7 +20,9 @@ builder.Services.AddSingleton<IDapperContext, DapperContext>();
 builder.Services.AddSingleton<IAppointmetsRepository, AppointmentRepository>();
 builder.Services.AddSingleton<IDetailsRepository, DetailsRepository>();
 builder.Services.AddSingleton<IUsersRepository, UserRepository>();
-builder.Services.AddSingleton<IClientesBLL, ClientesBLL>();
+builder.Services.AddSingleton<IAppoinmentsBLL, AppointmentsBLL>();
+builder.Services.AddSingleton<IUsersBLL, UsersBLL>();
+builder.Services.AddSingleton<IDetailsBLL, DetailsBLL>();
 
 var app = builder.Build();
 
