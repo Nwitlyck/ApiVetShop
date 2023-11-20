@@ -11,11 +11,11 @@ namespace ApiVetShop.BLL
         {
             _usersRepository = usersRepository;
         }
-        public async Task<ResponseUsers> SelectUser(int id)
+        public async Task<ResponseUsers> SelectUser(string email)
         {
             try
             {
-                var user = await _usersRepository.SelectUser(id);
+                var user = await _usersRepository.SelectUser(email);
 
                 var responseUsers = new ResponseUsers();
                 var responseModel = new ResponseModel();
@@ -31,7 +31,7 @@ namespace ApiVetShop.BLL
                 else
                 {
                     responseModel.errorcode = 1;
-                    responseModel.errormsg = "No se ha podido encontrar el usuario con el id: " + id.ToString();
+                    responseModel.errormsg = "No se ha podido encontrar el usuario con el correo: " + email;
                 }
 
                 responseUsers.Errors = responseModel;

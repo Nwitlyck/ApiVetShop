@@ -30,14 +30,14 @@ namespace ApiVetShop.Repository
             }
         }
 
-        public async Task<int> UpdateAppointment(Appoiments appoiment)
+        public async Task<int> UpdateAppointment(AppoinmentUpdate appoinmentUpdate)
         {
             try
             {
                 var param = new DynamicParameters();
-                param.Add("@vId", appoiment.Id, DbType.Int64, ParameterDirection.Input);
-                param.Add("@vDescription", appoiment.Description, DbType.String, ParameterDirection.Input);
-                param.Add("@vState", appoiment.State, DbType.Int64, ParameterDirection.Input);
+                param.Add("@vId", appoinmentUpdate.Id, DbType.Int64, ParameterDirection.Input);
+                param.Add("@vDescription", appoinmentUpdate.Description, DbType.String, ParameterDirection.Input);
+                param.Add("@vState", appoinmentUpdate.State, DbType.Int64, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
                     return await conn.QuerySingleOrDefaultAsync<int>("[vetShop].[dbo].[update_appointment]", param, commandType: CommandType.StoredProcedure);

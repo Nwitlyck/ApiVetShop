@@ -5,6 +5,7 @@ using ApiVetShop.BLL;
 using ApiVetShop.IBLL;
 using ApiVetShop.Repository;
 using ApiVetShop.IRepository;
+using ApiVetShop.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //crear referencias singleton para las interfaces y sus clases.
+builder.Services.AddSingleton<EncrypAPICall, EncrypAPICall>();
 builder.Services.AddSingleton<IDapperContext, DapperContext>();
 builder.Services.AddSingleton<IAppointmetsRepository, AppointmentRepository>();
 builder.Services.AddSingleton<IDetailsRepository, DetailsRepository>();

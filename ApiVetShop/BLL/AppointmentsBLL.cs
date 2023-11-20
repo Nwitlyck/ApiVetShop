@@ -34,14 +34,14 @@ namespace ApiVetShop.BLL
             }
         }
 
-        public async Task<ResponseAppointments> UpdateAppointment(Appoiments appoiment)
+        public async Task<ResponseAppointmentsUpdate> UpdateAppointment(AppoinmentUpdate appoinmentUpdate)
         {
             try
             {
-                var idAppoinment = await _appointmetsRepository.UpdateAppointment(appoiment);
+                var idAppoinment = await _appointmetsRepository.UpdateAppointment(appoinmentUpdate);
 
-                var responseAppoinments = new ResponseAppointments();
-                responseAppoinments.Appointment.Id = idAppoinment;
+                var responseAppoinments = new ResponseAppointmentsUpdate();
+                responseAppoinments.AppoinmentUpdate.Id = idAppoinment;
 
                 var responseModel = new ResponseModel();
                 responseModel.errorcode = 0;
