@@ -43,18 +43,18 @@ namespace ApiVetShop.Controllers
             }
         }   
 
-        [HttpPost]
+        [HttpPut]
         [Route("Update")]
-        public async Task<ActionResult<ResponseAppointments>> Update(Appoiments appointment)
+        public async Task<ActionResult<ResponseAppointmentsUpdate>> Update(AppoinmentUpdate appoinmentUpdate)
         {
             try
             {
-                var response = await _appoinmentBLL.UpdateAppointment(appointment);
+                var response = await _appoinmentBLL.UpdateAppointment(appoinmentUpdate);
                 return new JsonResult(response);
             }
             catch (Exception)
             {
-                var responseCitas = new ResponseAppointments();
+                var responseCitas = new ResponseAppointmentsUpdate();
 
                 var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;

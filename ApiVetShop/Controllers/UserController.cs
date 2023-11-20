@@ -19,19 +19,19 @@ namespace ApiVetShop.Controllers
 
         [HttpGet]
         [Route("Select")]
-        public async Task<ActionResult<ResponseUsers>> ObtainUsers(int id)
+        public async Task<ActionResult<ResponseUsers>> ObtainUsers(string email)
         {
             try
             {
-                return await _userBLL.SelectUser(id);
+                return await _userBLL.SelectUser(email);
 
             }
             catch (Exception)
             {
 
-                ResponseUsers responseUsers = new ResponseUsers();
+                var responseUsers = new ResponseUsers();
 
-                ResponseModel responseModel = new ResponseModel();
+                var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al buscar el Usuario";
                 responseUsers.Errors = responseModel;
