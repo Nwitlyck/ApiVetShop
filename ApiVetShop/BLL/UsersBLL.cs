@@ -1,4 +1,5 @@
-﻿using ApiVetShop.IBLL;
+﻿using ApiVetShop.Helpers;
+using ApiVetShop.IBLL;
 using ApiVetShop.IRepository;
 using ApiVetShop.Models;
 
@@ -7,9 +8,11 @@ namespace ApiVetShop.BLL
     public class UsersBLL : IUsersBLL
     {
         private IUsersRepository _usersRepository;
-        public UsersBLL(IUsersRepository usersRepository)
+        private readonly EncrypAPICall _encrypAPICall;
+        public UsersBLL(IUsersRepository usersRepository, EncrypAPICall encrypAPICall)
         {
             _usersRepository = usersRepository;
+            _encrypAPICall = encrypAPICall;
         }
         public async Task<ResponseUsers> SelectUser(string email)
         {
@@ -47,7 +50,10 @@ namespace ApiVetShop.BLL
         {
             try
             {
-                var flag = await _usersRepository.VerifyUser(email, password);
+
+                var encrypted = await _encrypAPICall.GetEncrypt(password);
+
+                var flag = await _usersRepository.VerifyUser(email, encrypted.encryp);
 
                 var responseVerify = new ResponseVerify();
                 var responseModel = new ResponseModel();
