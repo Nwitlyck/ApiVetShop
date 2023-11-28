@@ -1,4 +1,5 @@
-﻿using ApiVetShop.IBLL;
+﻿using ApiVetShop.Helpers;
+using ApiVetShop.IBLL;
 using ApiVetShop.IRepository;
 using ApiVetShop.Models;
 
@@ -7,15 +8,17 @@ namespace ApiVetShop.BLL
     public class UsersBLL : IUsersBLL
     {
         private IUsersRepository _usersRepository;
-        public UsersBLL(IUsersRepository usersRepository)
+        private readonly EncrypAPICall _encrypAPICall;
+        public UsersBLL(IUsersRepository usersRepository, EncrypAPICall encrypAPICall)
         {
             _usersRepository = usersRepository;
+            _encrypAPICall = encrypAPICall;
         }
-        public async Task<ResponseUsers> SelectUser(int id)
+        public async Task<ResponseUsers> SelectUser(string email)
         {
             try
             {
-                var user = await _usersRepository.SelectUser(id);
+                var user = await _usersRepository.SelectUser(email);
 
                 var responseUsers = new ResponseUsers();
                 var responseModel = new ResponseModel();
@@ -31,7 +34,7 @@ namespace ApiVetShop.BLL
                 else
                 {
                     responseModel.errorcode = 1;
-                    responseModel.errormsg = "No se ha podido encontrar el usuario con el id: " + id.ToString();
+                    responseModel.errormsg = "No se ha podido encontrar el usuario con el correo: " + email;
                 }
 
                 responseUsers.Errors = responseModel;
@@ -47,7 +50,10 @@ namespace ApiVetShop.BLL
         {
             try
             {
-                var flag = await _usersRepository.VerifyUser(email, password);
+
+                var encrypted = await _encrypAPICall.GetEncrypt(password);
+
+                var flag = await _usersRepository.VerifyUser(email, encrypted.encryp);
 
                 var responseVerify = new ResponseVerify();
                 var responseModel = new ResponseModel();

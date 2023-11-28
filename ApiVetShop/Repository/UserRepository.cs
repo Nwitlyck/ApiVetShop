@@ -1,4 +1,5 @@
-﻿using ApiVetShop.IDapper;
+﻿using ApiVetShop.Helpers;
+using ApiVetShop.IDapper;
 using ApiVetShop.IRepository;
 using ApiVetShop.Models;
 using Dapper;
@@ -13,13 +14,13 @@ namespace ApiVetShop.Repository
         {
             _context = context;
         }
-        public async Task<Users> SelectUser(int id)
+        public async Task<Users> SelectUser(string email)
         {
             try
             {
                 var param = new DynamicParameters();
 
-                param.Add("@vId", id, DbType.Int64, ParameterDirection.Input);
+                param.Add("@vEmail", email, DbType.String, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion()){
                     return await conn.QuerySingleOrDefaultAsync<Users>("[vetShop].[dbo].[select_user]", param, commandType: CommandType.StoredProcedure);
                 }
@@ -43,7 +44,7 @@ namespace ApiVetShop.Repository
                     return await conn.QuerySingleOrDefaultAsync<Boolean>("[vetShop].[dbo].[verify_user]", param, commandType: CommandType.StoredProcedure);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }
