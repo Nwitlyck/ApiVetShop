@@ -18,11 +18,11 @@ namespace ApiVetShop.Controllers
 
         [HttpGet]
         [Route("List")]
-        public async Task<ActionResult<ResponseListAppointments>> ObtainAppointmentsList(int userId)
+        public async Task<ActionResult<ResponseListAppointments>> ObtainAppointmentsList(string useremail)
         {
             try
             {
-                var resultado = await _appoinmentBLL.ListAppointments(userId);
+                var resultado = await _appoinmentBLL.ListAppointments(useremail);
                 return resultado;
             }
 
