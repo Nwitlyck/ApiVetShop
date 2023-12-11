@@ -11,11 +11,11 @@ namespace ApiVetShop.BLL
         {
             _appointmetsRepository = appointmetsRepository;
         }
-        public async Task<ResponseListAppointments> ListAppointments(int userId)
+        public async Task<ResponseListAppointments> ListAppointments(string useremail)
         {
             try
             {
-                var listAppoinments = await _appointmetsRepository.ListAppointmets(userId);
+                var listAppoinments = await _appointmetsRepository.ListAppointmets(useremail);
 
                 var responseListAppoinments = new ResponseListAppointments();
                 responseListAppoinments.Appointmets = listAppoinments.ToList();
