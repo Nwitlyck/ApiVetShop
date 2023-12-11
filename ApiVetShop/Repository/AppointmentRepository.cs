@@ -13,12 +13,12 @@ namespace ApiVetShop.Repository
         {
             _context = context;
         }
-        public async Task<IEnumerable<Appoiments>> ListAppointmets(int userId)
+        public async Task<IEnumerable<Appoiments>> ListAppointmets(string useremail)
         {
             try
             {
                 var param = new DynamicParameters();
-                param.Add("@vIdUser", userId, DbType.Int64, ParameterDirection.Input);
+                param.Add("@vEmail", useremail, DbType.String, ParameterDirection.Input);
                 using (var conn = _context.CrearConexion())
                 {
                     return await conn.QueryAsync<Appoiments>("[vetShop].[dbo].[list_appointments]", param, commandType: CommandType.StoredProcedure);
