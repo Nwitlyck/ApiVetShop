@@ -1,10 +1,11 @@
 
-using APICurso.Dapper;
-using APICurso.IDapper;
-using APICurso.BLL;
-using APICurso.IBLL;
-using APICurso.Repository;
-using APICurso.IRepository;
+using ApiVetShop.Dapper;
+using ApiVetShop.IDapper;
+using ApiVetShop.BLL;
+using ApiVetShop.IBLL;
+using ApiVetShop.Repository;
+using ApiVetShop.IRepository;
+using ApiVetShop.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +17,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //crear referencias singleton para las interfaces y sus clases.
+builder.Services.AddSingleton<EncrypAPICall, EncrypAPICall>();
 builder.Services.AddSingleton<IDapperContext, DapperContext>();
-builder.Services.AddSingleton<IClientesRepository, ClientesRepository>();
-builder.Services.AddSingleton<IClientesBLL, ClientesBLL>();
+builder.Services.AddSingleton<IAppointmetsRepository, AppointmentRepository>();
+builder.Services.AddSingleton<IDetailsRepository, DetailsRepository>();
+builder.Services.AddSingleton<IUsersRepository, UserRepository>();
+builder.Services.AddSingleton<IAppoinmentsBLL, AppointmentsBLL>();
+builder.Services.AddSingleton<IUsersBLL, UsersBLL>();
+builder.Services.AddSingleton<IDetailsBLL, DetailsBLL>();
 
 var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿namespace APICurso.Models
+﻿namespace ApiVetShop.Models
 {
     public class ResponseModel
     {

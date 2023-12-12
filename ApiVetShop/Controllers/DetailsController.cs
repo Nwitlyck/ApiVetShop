@@ -1,6 +1,6 @@
-﻿using APICurso.BLL;
-using APICurso.IBLL;
-using APICurso.Models;
+﻿using ApiVetShop.BLL;
+using ApiVetShop.IBLL;
+using ApiVetShop.Models;
 using ApiVetShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -19,26 +19,25 @@ namespace ApiVetShop.Controllers
         }
 
         [HttpGet]
-        [Route("Listar")]
-        public async Task<ActionResult<ResponseDetails>> ObtainDetails()
+        [Route("List")]
+        public async Task<ActionResult<ResponseListDetails>> ObtainDetails()
         {
             try
             {
-                var resultado = await _detailsBLL.ListaDetails();
+                var resultado = await _detailsBLL.ListDetails();
                 return resultado;
             }
             catch (Exception)
             {
 
-                var responseDetails = await new ResponseListDetails();
+                var responseDetails = new ResponseListDetails();
 
-                ResponseModel responseModel = new ResponseModel();
+                var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al obtener la lista de Detalles";
                 responseDetails.Errors = responseModel;
+
                 return responseDetails;
-
-
 
             }
         }

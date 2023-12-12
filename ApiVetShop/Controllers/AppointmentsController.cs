@@ -1,6 +1,5 @@
-﻿using APICurso.BLL;
-using APICurso.IBLL;
-using APICurso.Models;
+﻿using ApiVetShop.BLL;
+using ApiVetShop.IBLL;
 using ApiVetShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -11,19 +10,19 @@ namespace ApiVetShop.Controllers
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
-        private readonly IAppointmentsBLL _citasBLL;
-        public AppointmentsController(IAppointmentsBLL citasBLL)
+        private readonly IAppoinmentsBLL _appoinmentBLL;
+        public AppointmentsController(IAppoinmentsBLL citasBLL)
         {
-            _citasBLL = citasBLL;
+            _appoinmentBLL = citasBLL;
         }
 
         [HttpGet]
-        [Route("Listar")]
-        public async Task<ActionResult<ResponseListAppointments>> ObtainAppointments()
+        [Route("List")]
+        public async Task<ActionResult<ResponseListAppointments>> ObtainAppointmentsList(string useremail)
         {
             try
             {
-                var resultado = await _appointmentsBLL.ListAppointments();
+                var resultado = await _appoinmentBLL.ListAppointments(useremail);
                 return resultado;
             }
 
@@ -31,9 +30,9 @@ namespace ApiVetShop.Controllers
 
             {
 
-                ResponseListAppointments responseAppointments = new ResponseListAppointments();
+                var responseAppointments = new ResponseListAppointments();
 
-                ResponseModel responseModel = new ResponseModel();
+                var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al obtener la lista de citas";
                 responseAppointments.Errors = responseModel;
@@ -44,20 +43,20 @@ namespace ApiVetShop.Controllers
             }
         }   
 
-        [HttpPost]
-        [Route("Crear")]
-        public async Task<ActionResult<ResponseAppointments>> Crear(Appointments appointment)
+        [HttpPut]
+        [Route("Update")]
+        public async Task<ActionResult<ResponseAppointmentsUpdate>> Update(AppoinmentUpdate appoinmentUpdate)
         {
             try
             {
-                var response = await _appointmentsBLL.Crear(appointment);
+                var response = await _appoinmentBLL.UpdateAppointment(appoinmentUpdate);
                 return new JsonResult(response);
             }
             catch (Exception)
             {
-                var responseCitas = new ResponseAppointments();
+                var responseCitas = new ResponseAppointmentsUpdate();
 
-                ResponseModel responseModel = new ResponseModel();
+                var responseModel = new ResponseModel();
                 responseModel.errorcode = -1;
                 responseModel.errormsg = "Error al insertar las citas";
                 responseCitas.Errors = responseModel;

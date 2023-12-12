@@ -2,9 +2,9 @@
 
 namespace ApiVetShop.Models
 {
-    public class ResponseListAppointments
+    public class ResponseAppointmentsUpdate
     {
-        public List<Appoiments> Appointmets { get; set; } = new List<Appoiments>();
+        public AppoinmentUpdate AppoinmentUpdate { get; set; } = new AppoinmentUpdate();
         public ResponseModel Errors { get; set; } = new ResponseModel();
     }
 }

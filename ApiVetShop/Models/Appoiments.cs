@@ -8,11 +8,11 @@
         public string? UnitName { get; set; }
         public string? SiteName { get; set; }
         public string? AsistantName { get; set; }
-
-        public string? Adress { get; set; }
-        public string? Canton { get; set; }
+        public DateTime? DateTime { get; set; }
+        public string? Address { get; set; }
+        public string? Canton { get; set; } 
         public string? Province { get; set; }
         public string? Description { get; set; }
-        public string? State { get; set; }
+        public int State { get; set; }
     }
 }
