@@ -39,13 +39,13 @@ namespace ApiVetShop.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Verify")]
-        public async Task<ActionResult<ResponseVerify>> ObtainUsers(string email, string password)
+        public async Task<ActionResult<ResponseVerify>> ObtainUsers(LogIn logIn)
         {
             try
             {
-                return await _userBLL.VerifyUser(email, password);
+                return await _userBLL.VerifyUser(logIn);
 
             }
             catch (Exception)
