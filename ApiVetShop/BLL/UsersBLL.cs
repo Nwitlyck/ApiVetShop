@@ -46,14 +46,14 @@ namespace ApiVetShop.BLL
             }
         }
 
-        public async Task<ResponseVerify> VerifyUser(string email, string password)
+        public async Task<ResponseVerify> VerifyUser(LogIn logIn)
         {
             try
             {
 
-                var encrypted = await _encrypAPICall.GetEncrypt(password);
+                var encrypted = await _encrypAPICall.GetEncrypt(logIn.Password);
 
-                var flag = await _usersRepository.VerifyUser(email, encrypted.encryp);
+                var flag = await _usersRepository.VerifyUser(logIn.Email, encrypted.encryp);
 
                 var responseVerify = new ResponseVerify();
                 var responseModel = new ResponseModel();
